@@ -1,0 +1,164 @@
+/* ═══ Scroll-Driven Animations (Pure CSS) ═══ */
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #818cf8, #06b6d4, #f472b6);
+  transform-origin: left;
+  z-index: 100;
+  animation: scroll-progress-grow auto linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes scroll-progress-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ─── Parallax Hero ─── */
+.parallax-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.parallax-bg {
+  position: absolute;
+  inset: -20%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(244, 114, 182, 0.1) 0%, transparent 50%);
+  animation: parallax-bg-move auto linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes parallax-bg-move {
+  from { transform: translateY(0); }
+  to { transform: translateY(30%); }
+}
+
+.parallax-mid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+  background-size: 60px 60px;
+  animation: parallax-mid-move auto linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes parallax-mid-move {
+  from { transform: translateY(0); }
+  to { transform: translateY(15%); }
+}
+
+.parallax-fg {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  animation: parallax-fg-move auto linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes parallax-fg-move {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-50%); opacity: 0; }
+}
+
+/* ─── Scroll Sections ─── */
+.scroll-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+}
+
+/* ─── Scroll Reveal ─── */
+.scroll-reveal {
+  animation: scroll-reveal-up auto ease-out both;
+  animation-timeline: view();
+  animation-range: entry 10% entry 40%;
+}
+
+@keyframes scroll-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-reveal-left {
+  animation-name: scroll-reveal-from-left;
+}
+
+@keyframes scroll-reveal-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.scroll-reveal-right {
+  animation-name: scroll-reveal-from-right;
+}
+
+@keyframes scroll-reveal-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ─── Card Entrance (staggered via view timeline) ─── */
+.card-entrance {
+  animation: card-pop auto ease-out both;
+  animation-timeline: view();
+  animation-range: entry 5% entry 35%;
+}
+
+@keyframes card-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Stagger delays using animation-range offset */
+.card-entrance-0 { animation-range: entry 0% entry 30%; }
+.card-entrance-1 { animation-range: entry 3% entry 33%; }
+.card-entrance-2 { animation-range: entry 6% entry 36%; }
+.card-entrance-3 { animation-range: entry 9% entry 39%; }
+.card-entrance-4 { animation-range: entry 12% entry 42%; }
+.card-entrance-5 { animation-range: entry 15% entry 45%; }
+
+/* ─── Scroll Container ─── */
+.scroll-container {
+  background-color: #030712;
+  color: #f3f4f6;
+}
